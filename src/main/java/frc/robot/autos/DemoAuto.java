@@ -16,7 +16,7 @@ public class DemoAuto extends SequentialCommandGroup {
   Drivetrain subDrivetrain;
   boolean isOpenLoop;
   double desiredXSpeed = 1; // meters per second
-  double desiredYSpeed = 0; // meters per second
+  double desiredYSpeed = 1; // meters per second
   double timeoutSeconds = 2;
   double desiredAngleDegrees = 45;
 
@@ -27,10 +27,20 @@ public class DemoAuto extends SequentialCommandGroup {
     addCommands(
         Commands.runOnce(() -> subDrivetrain.resetYaw()), // Set our current rotation to wherever we currently are
 
-        new DemoDrive(subDrivetrain, desiredXSpeed, desiredYSpeed, timeoutSeconds, isOpenLoop),
+        new DemoDrive(subDrivetrain, 1, 0, 2, isOpenLoop),
 
-        new DemoSteer(subDrivetrain, desiredAngleDegrees)
+        new DemoSteer(subDrivetrain, 270),
 
-    );
+        new DemoSteer(subDrivetrain, 315),
+
+        new DemoDrive(subDrivetrain, .5, .5, 1, isOpenLoop),
+        new DemoSteer(subDrivetrain, 45),
+        new DemoDrive(subDrivetrain, .5, .5, 1, isOpenLoop),
+    new DemoSteer(subDrivetrain, 145),
+    new DemoDrive(subDrivetrain, .5, .5, 1, isOpenLoop),
+    new DemoSteer(subDrivetrain, 45),
+    new DemoDrive(subDrivetrain, .5, .5, 1, isOpenLoop)
+    
+        ); 
   }
 }
