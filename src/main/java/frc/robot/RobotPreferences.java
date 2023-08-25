@@ -7,14 +7,14 @@ import edu.wpi.first.math.util.Units;
 public class RobotPreferences {
   public static final class prefDrivetrain {
     // This PID is implemented on each module, not the Drivetrain subsystem.
-    public static final SN_DoublePreference driveF = new SN_DoublePreference("driveF", 0.045);
-    public static final SN_DoublePreference driveP = new SN_DoublePreference("driveP", 0.1);
-    public static final SN_DoublePreference driveI = new SN_DoublePreference("driveI", 0.0);
-    public static final SN_DoublePreference driveD = new SN_DoublePreference("driveD", 1.0);
+    public static final SN_DoublePreference modDriveF = new SN_DoublePreference("modDriveF", 0.045);
+    public static final SN_DoublePreference modDriveP = new SN_DoublePreference("modDriveP", 0.1);
+    public static final SN_DoublePreference modDriveI = new SN_DoublePreference("modDriveI", 0.0);
+    public static final SN_DoublePreference modDriveD = new SN_DoublePreference("modDriveD", 1.0);
 
-    public static final SN_DoublePreference steerP = new SN_DoublePreference("steerP", 0.3);
-    public static final SN_DoublePreference steerI = new SN_DoublePreference("steerI", 0.0);
-    public static final SN_DoublePreference steerD = new SN_DoublePreference("steerD", 6.0);
+    public static final SN_DoublePreference modSteerP = new SN_DoublePreference("modSteerP", 0.3);
+    public static final SN_DoublePreference modSteerI = new SN_DoublePreference("modSteerI", 0.0);
+    public static final SN_DoublePreference modSteerD = new SN_DoublePreference("modSteerD", 6.0);
 
     public static final SN_DoublePreference autoDriveP = new SN_DoublePreference("autoDriveP", 2);
     public static final SN_DoublePreference autoDriveI = new SN_DoublePreference("autoDriveI", 0);
@@ -23,6 +23,13 @@ public class RobotPreferences {
     public static final SN_DoublePreference autoSteerP = new SN_DoublePreference("autoSteerP", 0.5);
     public static final SN_DoublePreference autoSteerI = new SN_DoublePreference("autoSteerI", 0.0);
     public static final SN_DoublePreference autoSteerD = new SN_DoublePreference("autoSteerD", 0.0);
+
+    // PID for Drivetrain
+    public static final SN_DoublePreference steerP = new SN_DoublePreference("steerP", 8.0);
+    public static final SN_DoublePreference steerI = new SN_DoublePreference("steerI", 0);
+    public static final SN_DoublePreference steerD = new SN_DoublePreference("steerD", 0.2);
+    // In Degrees
+    public static final SN_DoublePreference steerPIDTolerance = new SN_DoublePreference("steerPIDTolerance", 2);
 
     public static final SN_DoublePreference minimumSteerSpeedPercent = new SN_DoublePreference("minimumSteerSpeed",
         0.01);

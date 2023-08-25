@@ -18,7 +18,7 @@ public final class Constants {
   public static class constDrivetrain {
     // In Degrees: Obtain by aligning all of the wheels in the correct direction and
     // copy-pasting the Raw Absolute Encoder value
-    public static final double FRONT_LEFT_ABS_ENCODER_OFFSET = 17.402344;
+    public static final double FRONT_LEFT_ABS_ENCODER_OFFSET = 242.753906;
     public static final double FRONT_RIGHT_ABS_ENCODER_OFFSET = 232.294922;
     public static final double BACK_LEFT_ABS_ENCODER_OFFSET = 87.451172;
     public static final double BACK_RIGHT_ABS_ENCODER_OFFSET = 333.369141;

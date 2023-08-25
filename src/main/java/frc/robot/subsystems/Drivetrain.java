@@ -15,6 +15,7 @@ import com.pathplanner.lib.auto.SwerveAutoBuilder;
 
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.VecBuilder;
+import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.estimator.SwerveDrivePoseEstimator;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
@@ -39,6 +40,7 @@ public class Drivetrain extends SubsystemBase {
   public SwerveAutoBuilder swerveAutoBuilder;
   private AHRS navX;
   private boolean isFieldRelative;
+  private PIDController steerPID;
 
   public PathPlannerTrajectory exampleAuto;
 
@@ -56,6 +58,11 @@ public class Drivetrain extends SubsystemBase {
             mapDrivetrain.BACK_RIGHT_ABSOLUTE_ENCODER_CAN, constDrivetrain.BACK_RIGHT_ABS_ENCODER_OFFSET),
     };
     swerveKinematics = constDrivetrain.SWERVE_KINEMATICS;
+
+    steerPID = new PIDController(
+        prefDrivetrain.steerP.getValue(),
+        prefDrivetrain.steerI.getValue(),
+        prefDrivetrain.steerD.getValue());
 
     navX = new AHRS();
 
@@ -102,6 +109,14 @@ public class Drivetrain extends SubsystemBase {
     exampleAuto = PathPlanner.loadPath("examplePath", new PathConstraints(
         Units.feetToMeters(prefDrivetrain.autoMaxSpeedFeet.getValue()),
         Units.feetToMeters(prefDrivetrain.autoMaxAccelFeet.getValue())));
+
+    steerPID.setPID(
+        prefDrivetrain.steerP.getValue(),
+        prefDrivetrain.steerI.getValue(),
+        prefDrivetrain.steerD.getValue());
+    steerPID.setTolerance(Units.inchesToMeters(prefDrivetrain.steerPIDTolerance.getValue()));
+    steerPID.enableContinuousInput(-Math.PI, Math.PI);
+    steerPID.reset();
 
   }
 
@@ -193,6 +208,30 @@ public class Drivetrain extends SubsystemBase {
 
     SwerveModuleState[] desiredModuleStates = swerveKinematics.toSwerveModuleStates(chassisSpeeds);
     setModuleStates(desiredModuleStates, isOpenLoop);
+  }
+
+  /**
+   * Rotate to a given angle in degrees
+   * 
+   * @param rotation   Desired rotation in field-relative degrees
+   * @param isOpenLoop Are the modules being set based on open loop or closed
+   *                   // * loop control
+   *                   // *
+   *                   //
+   */
+  public void rotateToAngle(double desiredRotation, boolean isOpenLoop) {
+    steerPID.setSetpoint(Units.degreesToRadians(desiredRotation)); // Tell the
+    // PID where it needs to go
+
+    double angleFromCurrentAngle = steerPID.calculate(getRotation().getRadians()); // Tell the PID where it is
+
+    angleFromCurrentAngle = MathUtil.clamp(angleFromCurrentAngle,
+        -Units.degreesToRadians(prefDrivetrain.turnSpeed.getValue()),
+        Units.degreesToRadians(prefDrivetrain.turnSpeed.getValue())); // Limit the
+    // speed so it doesnt die
+
+    // Give it to the drive command
+    drive(new Translation2d(0, 0), angleFromCurrentAngle, isOpenLoop);
   }
 
   /**

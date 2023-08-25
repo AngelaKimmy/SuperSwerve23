@@ -6,13 +6,13 @@ package frc.robot;
 
 import frc.robot.Constants.constControllers;
 import frc.robot.RobotMap.mapControllers;
+import frc.robot.autos.DemoAuto;
 import frc.robot.autos.ExampleAuto;
 import frc.robot.commands.Drive;
 import frc.robot.subsystems.Drivetrain;
 
 import com.frcteam3255.joystick.SN_XboxController;
 
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 
@@ -26,8 +26,9 @@ public class RobotContainer {
 
     // The Left Y and X Axies are swapped because from behind the glass, the X Axis
     // is actually in front of you
-    subDrivetrain
-        .setDefaultCommand(new Drive(subDrivetrain, conDriver.axis_LeftY, conDriver.axis_LeftX, conDriver.axis_RightX));
+    // subDrivetrain
+    // .setDefaultCommand(new Drive(subDrivetrain, conDriver.axis_LeftY,
+    // conDriver.axis_LeftX, conDriver.axis_RightX));
 
     configureBindings();
 
@@ -45,6 +46,6 @@ public class RobotContainer {
   }
 
   public Command getAutonomousCommand() {
-    return new ExampleAuto(subDrivetrain);
+    return new DemoAuto(subDrivetrain);
   }
 }

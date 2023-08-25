@@ -53,10 +53,10 @@ public class SwerveModule extends SubsystemBase {
     // -✨- Drive Motor Config -✨-
     driveMotor.configFactoryDefault();
 
-    driveConfiguration.slot0.kF = prefDrivetrain.driveF.getValue();
-    driveConfiguration.slot0.kP = prefDrivetrain.driveP.getValue();
-    driveConfiguration.slot0.kI = prefDrivetrain.driveI.getValue();
-    driveConfiguration.slot0.kD = prefDrivetrain.driveD.getValue();
+    driveConfiguration.slot0.kF = prefDrivetrain.modDriveF.getValue();
+    driveConfiguration.slot0.kP = prefDrivetrain.modDriveP.getValue();
+    driveConfiguration.slot0.kI = prefDrivetrain.modDriveI.getValue();
+    driveConfiguration.slot0.kD = prefDrivetrain.modDriveD.getValue();
 
     driveMotor.setNeutralMode(constDrivetrain.DRIVE_NEUTRAL_MODE);
     driveMotor.setInverted(constDrivetrain.DRIVE_MOTOR_INVERT);
@@ -66,9 +66,9 @@ public class SwerveModule extends SubsystemBase {
     // -✨- Steer Motor Config -✨-
     steerMotor.configFactoryDefault();
 
-    steerConfiguration.slot0.kP = prefDrivetrain.steerP.getValue();
-    steerConfiguration.slot0.kI = prefDrivetrain.steerI.getValue();
-    steerConfiguration.slot0.kD = prefDrivetrain.steerD.getValue();
+    steerConfiguration.slot0.kP = prefDrivetrain.modSteerP.getValue();
+    steerConfiguration.slot0.kI = prefDrivetrain.modSteerI.getValue();
+    steerConfiguration.slot0.kD = prefDrivetrain.modSteerD.getValue();
 
     steerMotor.setNeutralMode(constDrivetrain.STEER_NEUTRAL_MODE);
     steerMotor.setInverted(constDrivetrain.STEER_MOTOR_INVERT);
