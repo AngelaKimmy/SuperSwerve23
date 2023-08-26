@@ -10,7 +10,7 @@ import frc.robot.subsystems.Drivetrain;
 
 public class DemoSteer extends CommandBase {
   Drivetrain subDrivetrain;
-  double rotationDegrees; // field relative
+  double rotationDegrees; // Field relative (counter clockwise)
 
   public DemoSteer(Drivetrain subDrivetrain, double rotationDegrees) {
     this.subDrivetrain = subDrivetrain;
@@ -37,6 +37,7 @@ public class DemoSteer extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
+    // End when we are within a range of our desired angle
     return Math.abs(subDrivetrain.getRotation().getDegrees() - rotationDegrees) < prefDrivetrain.steerPIDTolerance
         .getValue();
   }

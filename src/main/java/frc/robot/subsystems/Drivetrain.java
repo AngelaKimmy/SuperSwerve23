@@ -214,21 +214,21 @@ public class Drivetrain extends SubsystemBase {
    * Rotate to a given angle in degrees
    * 
    * @param rotation   Desired rotation in field-relative degrees
-   * @param isOpenLoop Are the modules being set based on open loop or closed
-   *                   // * loop control
-   *                   // *
-   *                   //
+   * @param isOpenLoop Are the modules being set based on open loop or closed loop
+   *                   control
+   * 
    */
   public void rotateToAngle(double desiredRotation, boolean isOpenLoop) {
-    steerPID.setSetpoint(Units.degreesToRadians(desiredRotation)); // Tell the
-    // PID where it needs to go
+    // Tell the PID controller where it needs to go
+    steerPID.setSetpoint(Units.degreesToRadians(desiredRotation));
 
-    double angleFromCurrentAngle = steerPID.calculate(getRotation().getRadians()); // Tell the PID where it is
+    // Tell the PID where it currently is
+    double angleFromCurrentAngle = steerPID.calculate(getRotation().getRadians());
 
+    // Limit the speed so that it doesn't die
     angleFromCurrentAngle = MathUtil.clamp(angleFromCurrentAngle,
         -Units.degreesToRadians(prefDrivetrain.turnSpeed.getValue()),
-        Units.degreesToRadians(prefDrivetrain.turnSpeed.getValue())); // Limit the
-    // speed so it doesnt die
+        Units.degreesToRadians(prefDrivetrain.turnSpeed.getValue()));
 
     // Give it to the drive command
     drive(new Translation2d(0, 0), angleFromCurrentAngle, isOpenLoop);

@@ -10,11 +10,9 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Drivetrain;
 
 public class DemoDrive extends CommandBase {
-  /** Creates a new DemoDrive. */
   Drivetrain subDrivetrain;
   double xVelocity;
   double yVelocity;
-  double startingTime;
   double desiredTime;
   double endTime;
   boolean isOpenLoop;
@@ -31,8 +29,7 @@ public class DemoDrive extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    startingTime = Timer.getFPGATimestamp();
-    endTime = startingTime + desiredTime;
+    endTime = Timer.getFPGATimestamp() + desiredTime;
   }
 
   // Called every time the scheduler runs while the command is scheduled.

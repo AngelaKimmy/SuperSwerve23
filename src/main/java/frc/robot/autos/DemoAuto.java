@@ -4,14 +4,13 @@
 
 package frc.robot.autos;
 
-import com.pathplanner.lib.auto.SwerveAutoBuilder;
-
-import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.commands.DemoDrive;
 import frc.robot.commands.DemoSteer;
 import frc.robot.subsystems.Drivetrain;
+
+// Place your moves here!
 
 public class DemoAuto extends SequentialCommandGroup {
   Drivetrain subDrivetrain;

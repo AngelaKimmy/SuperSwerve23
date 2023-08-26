@@ -208,7 +208,7 @@ public class SwerveModule extends SubsystemBase {
         constDrivetrain.STEER_GEAR_RATIO);
 
     // If the requested speed is lower than a relevant steering speed,
-    // don't turn the motor. Set it to whatever it's previous angle was.
+    // don't turn the motor.
     if (Math.abs(state.speedMetersPerSecond) < (prefDrivetrain.minimumSteerSpeedPercent.getValue()
         * constDrivetrain.MAX_MODULE_SPEED)) {
       return;
